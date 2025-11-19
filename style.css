@@ -1,0 +1,32 @@
+body {
+    background-color: rgb(10, 15, 54);
+
+}
+h1 {
+    text-align: center;
+}
+main {
+    width: 70%;
+    margin: auto;
+    display: flex;
+
+    justify-content: center;
+}
+
+.container-border {
+    width: 720px;
+    height: 720px;
+    background-color: rgb(230, 27, 27);
+    border-radius: 35px;
+}
+.container {
+    width: 600px;
+    height: 600px;
+    margin: 60px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap:wrap;
+
+}
+
