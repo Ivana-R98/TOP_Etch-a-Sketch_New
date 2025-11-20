@@ -1,6 +1,13 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
 body {
-    background-color: rgb(10, 15, 54);
-
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: 
+    linear-gradient(to bottom, #e0c193, #ad8b5f)     
 }
 h1 {
     text-align: center;
@@ -30,9 +37,18 @@ main {
     border-radius: 5px;
     display: flex;
     flex-wrap:wrap;
-    cursor: crosshair;
+    -webkit-user-select: none; /* For Safari and Chrome */
+    -moz-user-select: none; /* For Firefox */
+    -ms-user-select: none; /* For Internet Explorer 10+ */
+    user-select: none; /* Standard syntax */
 }
 /* .topBtns, .bottomBtns {
 
 } */
 
+
+
+footer {
+    text-align: center;
+
+}
