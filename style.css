@@ -18,15 +18,21 @@ main {
     height: 720px;
     background-color: rgb(230, 27, 27);
     border-radius: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .container {
     width: 600px;
     height: 600px;
-    margin: 60px;
     background-color: white;
     border-radius: 5px;
     display: flex;
     flex-wrap:wrap;
-
+    cursor: crosshair;
 }
+/* .topBtns, .bottomBtns {
+
+} */
 
