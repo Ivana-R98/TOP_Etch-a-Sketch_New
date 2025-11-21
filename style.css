@@ -147,5 +147,74 @@ input[type="range"]::-moz-range-thumb {
 
 footer {
     text-align: center;
+}
 
+@media screen and (max-width: 900px) {
+    main {
+        width: 100%;
+    }
+    .container-border{
+        height: 320px;
+        width: 320px;
+        padding-left: 40px;
+    } 
+    .container-shadow {
+        height: 300px;
+        width: 300px;
+    }
+    .mode-btn, #resetBtn {
+        width: 60px;
+    }
+    .topBtns, .bottomBtns {
+        gap: 10px;
+    }
+    .grid {
+        min-width: 100px;
+        text-align: center;
+    }
+    #gridBtn {
+        display: block;
+    }
+    .pen {
+        position: absolute; 
+        top: 90px;    /* distance from the top inside the container */
+        left: 288px;  /* distance from the right edge inside the container */
+        transform: rotate(89deg);
+        height: 130px;
+    }
+}
+@media screen and (max-width: 425px) {
+    main {
+        width: 100%;
+    }
+    .container-border{
+        height: 300px;
+        width: 300px;
+        padding: 5px 30px 5px 10px;
+    } 
+    .container-shadow {
+        height: 300px;
+        width: 250px;
+    }
+    .mode-btn, #resetBtn {
+        width: 55px;
+    }
+    .topBtns, .bottomBtns {
+        gap: 5px;
+    }
+    .grid {
+        min-width: 100px;
+        text-align: center;
+    }
+    #gridBtn {
+        display: block;
+    }
+    .pen {
+        position: absolute; 
+        top: 90px;    /* distance from the top inside the container */
+        left: 65%;  /* distance from the right edge inside the container */
+        transform: rotate(89deg);
+        height: 130px;
+        z-index: 5;
+    }
 }
