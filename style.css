@@ -184,6 +184,9 @@ footer {
     }
 }
 @media screen and (max-width: 425px) {
+    body {
+        box-sizing: border-box;
+    }
     main {
         width: 100%;
     }
@@ -211,8 +214,8 @@ footer {
     }
     .pen {
         position: absolute; 
-        top: 90px;    /* distance from the top inside the container */
-        left: 65%;  /* distance from the right edge inside the container */
+        top: 90px; 
+        left: 64%;  
         transform: rotate(89deg);
         height: 130px;
         z-index: 5;

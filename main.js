@@ -11,13 +11,17 @@ const modeButtons = document.querySelectorAll(".mode-btn");
 let mode = "color";
 let color = "black";
 let mouseClicked = false;
+let isDrawing = false;
+let activeTouchId = 0;
 
 let cols = 16;
 let grid = cols*cols;
+let cells = []
 
 function createGrid(grid) {
     for(let i = 0; i < grid; i++) {
         let div = document.createElement("div");
+        cells = Array.from(document.querySelectorAll('.grid-square'))
         div.classList.add("grid-square");
         div.style.width = `${100/cols}%`;
         div.style.height = `${100/cols}%`;
@@ -48,7 +52,7 @@ document.body.addEventListener("mouseup",  () => {
 });
 
 // mousedown is fine for document.body instead of container as well
-container.addEventListener("mousedown", (e) => {
+container.addEventListener("mousedown", e => {
     e.preventDefault();
     mouseClicked = true;
     if(mode === "eraser") {
@@ -67,6 +71,38 @@ container.addEventListener("mousedown", (e) => {
         else if (mode === "eraser") eraseColor(e.target)
     }
 })
+//For touch
+container.addEventListener("touchstart", e => {
+    isDrawing = true;
+    activeTouchId = e.touches[0].identifier;
+}, { passive: false })
+container.addEventListener("touchmove", e => {
+    e.preventDefault()
+    Array.from(e.touches).forEach(touch => {
+        if(touch.identifier === activeTouchId) {
+            let rect = container.getBoundingClientRect();
+            let localX = touch.clientX - rect.left;
+            let localY = touch.clientY - rect.top;
+            let cellWidth = rect.width / cols;
+            let columnIndex = Math.floor(localX / cellWidth);
+            let rowIndex = Math.floor(localY / cellWidth);
+            let index = rowIndex * cols + columnIndex
+            let cell = cells[index]
+            if (cell.classList.contains('grid-square')) {
+                // draw here, e.g.
+                if (mode === "color") {
+                    drawColor(cell, color)
+                }
+                else if (mode === "rainbow") drawRainbow(cell)
+                else if (mode === "shade") drawShade(cell)
+                else if (mode === "eraser") eraseColor(cell)
+            }
+        }
+    })
+}, { passive: false })
+container.addEventListener("touchend", e => {
+    isDrawing = false;
+}, { passive: false });
 
 colorBtn.addEventListener("change", (e) => {
     color = e.target.value;
