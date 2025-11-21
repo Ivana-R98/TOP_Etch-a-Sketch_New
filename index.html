@@ -7,6 +7,12 @@
     <title>Etch-a-Sketch</title>
     <script src="./main.js" defer></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+    </style>
 </head>
 <body>
     <header>
@@ -15,14 +21,20 @@
     <main>
         <div class="container-border">
             <div class="topBtns">
-                <button class="btn" id="gridBtn">Grid</button>
-                <input type="color" id="colorBtn">
-                <button class="btn" id="rainbowBtn">Rainbow</button>
-                <button class="btn" id="shadeBtn">Shade</button>
+                <input  class="btn mode-btn" type="color" id="colorBtn">
+                <button class="btn mode-btn" id="rainbowBtn">Rainbow</button>
+                <button class="btn mode-btn" id="shadeBtn">Shade</button>
             </div>
-            <div class="container"></div>
+            <img src="./Assets/pen1.png" class="pen" alt="pen">
+            <div class="container-shadow">
+                <div class="container"></div>
+            </div>
             <div class="bottomBtns">
-                <button class="btn" id="eraserBtn">Eraser</button>
+                <button class="btn mode-btn" id="eraserBtn">Eraser</button>
+                <div class="grid">
+                    <input type="range" min="16" max="100" value="16" class="slider" id="gridBtn">
+                    <span id="gridValue">Grid: 16*16</span>
+                </div>
                 <button class="btn" id="resetBtn">Reset</button>
             </div>
         </div>

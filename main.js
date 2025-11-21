@@ -1,10 +1,12 @@
-let container = document.querySelector(".container");
-let gridBtn = document.querySelector("#gridBtn");
-let colorBtn = document.querySelector("#colorBtn");
-let rainbowBtn = document.querySelector("#rainbowBtn");
-let shadeBtn = document.querySelector("#shadeBtn");
-let eraserBtn = document.querySelector("#eraserBtn");
-let resetBtn = document.querySelector("#resetBtn");
+const container = document.querySelector(".container");
+const gridValue = document.querySelector("#gridValue");
+const gridBtn = document.querySelector("#gridBtn");
+const colorBtn = document.querySelector("#colorBtn");
+const rainbowBtn = document.querySelector("#rainbowBtn");
+const shadeBtn = document.querySelector("#shadeBtn");
+const eraserBtn = document.querySelector("#eraserBtn");
+const resetBtn = document.querySelector("#resetBtn");
+const modeButtons = document.querySelectorAll(".mode-btn");
 
 let mode = "color";
 let color = "black";
@@ -39,15 +41,27 @@ function createGrid(grid) {
     }
 }
 
-document.body.addEventListener("mouseup",  () => mouseClicked = false);
-container.addEventListener("dragstart", e =>  e.preventDefault())
+// EVENTS
+document.body.addEventListener("mouseup",  () => {
+    mouseClicked = false;
+    document.body.style.cursor  = "auto";
+});
+
 // mousedown is fine for document.body instead of container as well
 container.addEventListener("mousedown", (e) => {
     e.preventDefault();
     mouseClicked = true;
+    if(mode === "eraser") {
+        document.body.style.cursor = "url('./Assets/icons8-eraser-50.png') 4 40, auto";
+    } 
+    else {
+        document.body.style.cursor  = "url('./Assets/icons8-pencil-40.png') 4 40, crosshair";
+    }
     if (e.target.classList.contains('grid-square')) {
         // draw here, e.g.
-        if (mode === "color") drawColor(e.target, color)
+        if (mode === "color") {
+            drawColor(e.target, color)
+        }
         else if (mode === "rainbow") drawRainbow(e.target)
         else if (mode === "shade") drawShade(e.target)
         else if (mode === "eraser") eraseColor(e.target)
@@ -57,18 +71,36 @@ container.addEventListener("mousedown", (e) => {
 colorBtn.addEventListener("change", (e) => {
     color = e.target.value;
     mode = "color";
+    setActiveButton(colorBtn);   
 });
-rainbowBtn.addEventListener("click", () => {mode = "rainbow"});
-shadeBtn.addEventListener("click", () => {mode = "shade"});
-eraserBtn.addEventListener("click", () => {mode = "eraser"});
+rainbowBtn.addEventListener("click", () => {
+    mode = "rainbow";
+    setActiveButton(rainbowBtn); 
+});
+shadeBtn.addEventListener("click", () => {
+    mode = "shade";
+    setActiveButton(shadeBtn);   
+});
+eraserBtn.addEventListener("click", () => {
+    mode = "eraser";
+    setActiveButton(eraserBtn);  
+});
 resetBtn.addEventListener("click", () => resetGrid(grid));
-
-gridBtn.addEventListener("click", () => {
-    cols = +prompt("Grid size: ", "16");
+gridBtn.addEventListener("input", (e) => {
+    cols = +e.target.value;
+    gridValue.textContent = `Grid: ${cols} * ${cols}`;
     grid = cols*cols;
     resetGrid(grid);
 })
 
+container.addEventListener("dragstart", e =>  e.preventDefault());
+
+function setActiveButton(activeBtn) {
+    modeButtons.forEach(btn => btn.classList.remove("active"));
+    activeBtn.classList.add("active");
+}
+
+// Drawing functions
 function drawColor(el, color) {
     el.style.backgroundColor = color;
 }
@@ -91,9 +123,11 @@ function eraseColor(el) {
     el.style.backgroundColor = "white";
 }
 
+// Grid reset
 function resetGrid(grid) {
     container.innerHTML = "";
     createGrid(grid);
 }
+
 
 createGrid(grid);
