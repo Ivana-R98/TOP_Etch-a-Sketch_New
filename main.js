@@ -16,12 +16,11 @@ let activeTouchId = 0;
 
 let cols = 16;
 let grid = cols*cols;
-let cells = []
+let cells = [];
 
 function createGrid(grid) {
     for(let i = 0; i < grid; i++) {
         let div = document.createElement("div");
-        cells = Array.from(document.querySelectorAll('.grid-square'))
         div.classList.add("grid-square");
         div.style.width = `${100/cols}%`;
         div.style.height = `${100/cols}%`;
@@ -43,6 +42,7 @@ function createGrid(grid) {
 
         container.appendChild(div);
     }
+    cells = Array.from(document.querySelectorAll('.grid-square'))
 }
 
 // EVENTS
@@ -136,7 +136,7 @@ gridBtn.addEventListener("input", (e) => {
     cols = +e.target.value;
     gridValue.textContent = `Grid: ${cols} * ${cols}`;
     grid = cols*cols;
-    resetGrid(grid);
+    resetGrid();
 })
 
 container.addEventListener("dragstart", e =>  e.preventDefault());
@@ -170,8 +170,11 @@ function eraseColor(el) {
 }
 
 // Grid reset
-function resetGrid(grid) {
+function resetGrid() {
     container.innerHTML = "";
+    cells = [];
+    isDrawing = false;
+    activeTouchId = null;
     createGrid(grid);
 }
 
