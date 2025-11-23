@@ -162,6 +162,9 @@ footer {
         height: 300px;
         width: 300px;
     }
+    .container _{
+        touch-action: none;
+    }
     .mode-btn, #resetBtn {
         width: 60px;
     }

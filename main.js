@@ -71,24 +71,28 @@ container.addEventListener("mousedown", e => {
         else if (mode === "eraser") eraseColor(e.target)
     }
 })
-//For touch
+//For mobile/touch
 container.addEventListener("touchstart", e => {
     isDrawing = true;
     activeTouchId = e.touches[0].identifier;
 }, { passive: false })
 container.addEventListener("touchmove", e => {
-    e.preventDefault()
+    e.preventDefault();
+    let rect = container.getBoundingClientRect();
+    let cellWidth = rect.width / cols;
     Array.from(e.touches).forEach(touch => {
         if(touch.identifier === activeTouchId) {
-            let rect = container.getBoundingClientRect();
             let localX = touch.clientX - rect.left;
             let localY = touch.clientY - rect.top;
-            let cellWidth = rect.width / cols;
             let columnIndex = Math.floor(localX / cellWidth);
             let rowIndex = Math.floor(localY / cellWidth);
             let index = rowIndex * cols + columnIndex
-            let cell = cells[index]
-            if (cell.classList.contains('grid-square')) {
+            let cell = cells[index];
+            if (isDrawing
+            && columnIndex >= 0 && columnIndex < cols
+            && rowIndex >= 0 && rowIndex < cols
+            && cell
+            && cell.classList.contains('grid-square')) {
                 // draw here, e.g.
                 if (mode === "color") {
                     drawColor(cell, color)
@@ -100,8 +104,13 @@ container.addEventListener("touchmove", e => {
         }
     })
 }, { passive: false })
-container.addEventListener("touchend", e => {
-    isDrawing = false;
+container.addEventListener("touchend", (e) => {
+    Array.from(e.changedTouches).forEach(touch => {
+        if(touch.identifier === activeTouchId) {
+            isDrawing = false;
+            activeTouchId = null;
+        }
+    })
 }, { passive: false });
 
 colorBtn.addEventListener("change", (e) => {
