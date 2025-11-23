@@ -44,3 +44,39 @@ A new project for The Odin Project — Etch-a-Sketch built with HTML, CSS, and J
       div.style.backgroundColor = `rgba(0, 0, 0, opacity)`;
       ```
     - Activate via event listener and disable other modes.
+
+#### BONUS: Style 
+1. Slider input to select the grid size dynamically;
+    - Displays the current grid size as text;
+2. Color picker for selecting the drawing color in color mode;
+
+#### BONUS: Mobile Support 
+1. **Single-Finger Drawing**
+    - `touchstart`: 
+        - Set `isDrawing = true` and allow drawing;
+        - Also set `activeTouchId` to identify the first finger.
+    - `touchmove`: 
+        - Prevent default scrolling behavior: 
+        ```js 
+        e.preventDefault();
+        ```
+        - Get the grid’s bounding rectangle `getBoundingClientRect()` to know its position and size.
+        - Calculate the width of a single cell (`cellWidth = grid width / number of columns`).
+        - Loop through all current touches and select the one matching `activeTouchId`.
+            - Convert the finger’s position to row and column indices:
+            ```js 
+            columnIndex = Math.floor(localX / cellWidth)
+            rowIndex = Math.floor(localY / cellWidth)
+            index = rowIndex * cols + columnIndex
+            cell = cells[index]
+            ```
+            - Draw if: 
+                - `isDrawing = true`;
+                - Row and column are within bounds (0 to cols - 1);
+                - The cell exists and has the correct class;
+                - Apply the current drawing mode (color, rainbow, shade, or eraser).
+    - `touchend`: 
+        - Loop through `changedTouches` (fingers that just lifted).
+        - If the lifted finger matches `activeTouchId`: 
+            - Set `isDrawing = false` and stop drawing; 
+            - Clear `activeTouchId` (the active finger).
