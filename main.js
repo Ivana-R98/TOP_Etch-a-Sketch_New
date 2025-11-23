@@ -73,6 +73,7 @@ container.addEventListener("mousedown", e => {
 })
 //For mobile/touch
 container.addEventListener("touchstart", e => {
+    e.preventDefault();
     isDrawing = true;
     activeTouchId = e.touches[0].identifier;
 }, { passive: false })
