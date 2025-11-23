@@ -12,6 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    background-color: #e0c193;
     background: linear-gradient(to bottom, #e0c193, #ad8b5f);
 }
 body, button {
@@ -191,9 +192,6 @@ footer {
         box-sizing: border-box;
         height: 100%;
     }
-    main {
-        width: 100%;
-    }
     .container-border{
         height: 300px;
         width: 300px;
@@ -223,5 +221,16 @@ footer {
         transform: rotate(89deg);
         height: 130px;
         z-index: 5;
+    }
+}
+@media screen and (max-width: 300px) {
+    .container-border{
+        height: 250px;
+        width: 250px;
+        padding: 5px 30px 5px 10px;
+    } 
+    .container-shadow {
+        height: 250px;
+        width: 200px;
     }
 }
