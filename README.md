@@ -1,7 +1,7 @@
 # TOP_Etch-a-Sketch_New
 A new project for The Odin Project — Etch-a-Sketch built with HTML, CSS, and JavaScript.
 
-## Pseudocode
+## Development Notes
 
 1. Create a webpage with a container `<div>` and generate a **16×16 grid** of square cells using JavaScript.
     - Use **Flexbox** for responsive grid layout.
